@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Trabalho17</title>
+</head>
+<body>
+<style>
+    body {background-color: lightcyan;}
+ h1 {
+      font-size: 40px;
+      color: deepskyblue; font-family: Arial;
+      text-align: center;
+    }
+  
+#output {  font-size: 20px;
+       font-family: Arial;
+      text-align: center; }
+      #output2 {  font-size: 20px;
+       font-family: Arial;
+      text-align: center; } 
+      button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: lightskyblue;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse; 
+            width: 85%;
+            font-family: Arial;
+            font-size: 16px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px; 
+            text-align: center; 
+        }
+
+        th {
+            background-color: #f2f2f2; 
+        }
+        .primeira-tabela { 
+            padding: 10px 25px;
+            font-size: 14px;
+            background-color: yellowgreen;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;}
+
+</style>
+        <h1>Manipulação de Array</h1>
+       <center><button onclick="iniciar()">Iniciar Array</button></center>
+        <div id="output"></div> <br> 
+ <center> <table>
+  <tr>
+    <th><button class="primeira-tabela" onclick="tamanho()">Tamanho</button></th>
+    <th><button class="primeira-tabela" onclick="primeiro()">Primeiro Elemento</button></th>
+    <th><button class="primeira-tabela" onclick="ultimo()">Último Elemento</button></th>
+    <th><button class="primeira-tabela" onclick="trocarelemento()">Trocar Elementos</button></th>
+  </tr>
+  <tr>
+    <td><p id="tamanho"></p></td>
+    <td><p id="primeiro"></p></td>
+    <td><p id="ultimo"></p></td>
+    <td><p id="elementos"></p></td>
+  </tr>
+
+</table></center>    
+        <br>
+<center>
+<button class="primeira-tabela" onclick="listar()">Listar Array</button></center>
+<div id="output2"> </div> <br>
+   
+   
+<center> <table>
+    <tr>
+        <th>
+            <button class="primeira-tabela" onclick="retirar()">Retirar</button>
+        </th>
+        
+      <th><button class="primeira-tabela" onclick="baralhar()">Baralhar Elementos</button></th>
+      <th><button class="primeira-tabela" onclick="listar2()">Listar 2 em 2 Posições</button></th>
+    </tr>
+    <tr>
+      <td><p id="retirar"></p></td>
+      <td><p id="baralhar"></p></td>
+      <td><p id="listar2"></p></td>
+    </tr>
+  
+  </table></center> <br>
+
+  <center> <table>
+    <tr>
+      <th><button class="primeira-tabela" onclick="soma()">Soma</button></th>
+      <th><button class="primeira-tabela" onclick="media()">Média</button></th>
+      <th><button class="primeira-tabela" onclick="mediana()">Mediana</button></th>
+      <th><button class="primeira-tabela" onclick="maximo()">Máximo</button></th>
+      <th><button class="primeira-tabela" onclick="minimo()">Mínimo</button></th>
+    </tr>
+    <tr>
+      <td><p id="soma"></p></td>
+      <td><p id="media"></p></td>
+      <td><p id="mediana"></p></td>
+      <td><p id="maximo"></p></td>
+      <td><p id="minimo"></p></td>
+    </tr>
+  
+  </table></center>  <br>
+
+  <center> <table>
+    <tr>
+      <th><button class="primeira-tabela" onclick="repetidos()">Números Repetidos </button></th>
+      <th><button class="primeira-tabela" onclick="repetidos2()">Números Repetidos dado um Número</button></th>
+      <th><button class="primeira-tabela" onclick="aleatorios()">Números Aleatórios</button></th>    
+    </tr>
+    <tr>
+      <td><p id="repetidos"></p></td>
+      <td><p id="repetidos2"></p></td>
+      <td><p id="aleatorios"></p></td>
+    </tr>
+  
+  </table></center> <br>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    let array = []; 
+   
+    function iniciar() {
+       array = []; 
+       for (let i = 1; i <= 100; i++) {
+           array.push(i); 
+       }
+       atualizarDados();
+       listar(); 
+   }
+   
+   function tamanho() {
+       document.getElementById("tamanho").innerText = array.length;
+   }
+   
+   function primeiro() {
+       document.getElementById("primeiro").innerText = array[0] || " O Array está vazio";
+   }
+   
+   function ultimo() {
+       document.getElementById("ultimo").innerText = array[array.length - 1] || " O Array está vazio";
+   }
+   
+   function trocarelemento() {
+    let pos = parseInt(prompt("Posição (1 a 100):")) - 1; 
+    if (pos >= 0 && pos < array.length) { 
+        let valor = parseInt(prompt("Novo valor:"));
+        array[pos] = valor; 
+        document.getElementById("elementos").innerText = "Elemento na posição foi alterado.";
+        listar(); 
+        atualizarDados(); 
+    } else {
+        alert("Posição inválida! Por favor, insira um número entre 1 e 100.");
+    }
+}
+
+   function listar() {
+       const output2Div = document.getElementById("output2");
+       output2Div.innerHTML = "<p>" + array.join(", ") + "</p>";
+   }
+   
+   function retirar() {
+       let numero = prompt("Digite o número que deseja retirar:");
+       numero = parseInt(numero);
+       let index = array.indexOf(numero);
+   
+       if (index !== -1) {
+           array.splice(index, 1); 
+           document.getElementById("retirar").innerText = "Número " + numero + " removido!";
+           listar();
+           atualizarDados();
+       } else {
+           document.getElementById("retirar").innerText = "Número não encontrado!";
+       }
+   }
+   
+   function baralhar() {
+       for (let i = array.length - 1; i > 0; i--) {
+           let j = Math.floor(Math.random() * (i + 1)); 
+           let temp = array[i];
+           array[i] = array[j];
+           array[j] = temp;
+       } 
+       document.getElementById("baralhar").innerText = "Array baralhado!";
+       listar();
+   }
+   
+   function listar2() {
+       let listaImpares = "";
+       for (let i = 0; i < array.length; i += 2) {
+           listaImpares += array[i] + " "; 
+       }
+       document.getElementById("listar2").innerText = listaImpares;
+   }
+   
+   function soma() {
+       let soma = 0;
+       for (let i = 0; i < array.length; i++) {
+           soma += array[i];
+       }
+       document.getElementById("soma").innerText = soma;
+   }
+   
+   function media() {
+       let soma = 0;
+       for (let i = 0; i < array.length; i++) {
+           soma += array[i];
+       }
+       let media = soma / array.length;
+       document.getElementById("media").innerText = media;
+   }
+   
+   function mediana() {
+       let sortedArray = array.slice();
+       sortedArray.sort(function(a, b) { return a - b; }); 
+       let middle = Math.floor(sortedArray.length / 2);
+   
+       let mediana;
+       if (sortedArray.length % 2 === 0) {
+           mediana = (sortedArray[middle - 1] + sortedArray[middle]) / 2;
+       } else {
+           mediana = sortedArray[middle];
+       }
+   
+       document.getElementById("mediana").innerText = mediana;
+   }
+   
+   function maximo() {
+       let max = Math.max.apply(null, array); 
+       document.getElementById("maximo").innerText = max;
+   }
+   
+   function minimo() {
+       let min = Math.min.apply(null, array); 
+       document.getElementById("minimo").innerText = min;
+   }
+   
+   function atualizarDados() {
+       tamanho();
+       primeiro();
+       ultimo();
+       soma();
+       media();
+       mediana();
+       maximo();
+       minimo();
+   }
+   
+   function repetidos() {
+       let freq = {};
+       for (let i = 0; i < array.length; i++) {
+           let num = array[i];
+           if (freq[num] === undefined) {
+               freq[num] = 1;
+           } else {
+               freq[num]++;
+           }
+       }
+       let repetidos = [];
+       for (let num in freq) {
+           if (freq[num] > 1) {
+               repetidos.push(num);
+           }
+       }
+       document.getElementById("repetidos").innerText = repetidos.join(", ") || "Nenhum número repetido";
+   }
+   
+   function repetidos2() {
+       let numero = prompt("Digite o número que deseja verificar:");
+       numero = parseInt(numero);
+   
+       let freq = 0;
+       for (let i = 0; i < array.length; i++) {
+           if (array[i] === numero) {
+               freq++;
+           }
+       }
+       if (freq > 1) {
+           document.getElementById("repetidos").innerText = "O número " + numero + " aparece " + freq + " vezes.";
+       } else if (freq === 1) {
+           document.getElementById("repetidos").innerText = "O número " + numero + " aparece apenas uma vez.";
+       } else {
+           document.getElementById("repetidos").innerText = "O número " + numero + " não está no array.";
+       }
+   }
+   
+   function aleatorios() {
+       let aleatorioArray = [];
+       for (let i = 0; i < 100; i++) {
+           let num = Math.floor(Math.random() * 201) - 100; 
+           aleatorioArray.push(num);
+       }
+   
+       let resultado = "";
+       for (let i = 0; i < aleatorioArray.length; i++) {
+           if (aleatorioArray[i] < 0) {
+               resultado += '<span style="color: red;">' + aleatorioArray[i] + '</span>, ';
+           } else {
+               resultado += '<span style="color: green;">' + aleatorioArray[i] + '</span>, ';
+           }
+       }
+       document.getElementById("aleatorios").innerHTML = resultado.slice(0, -2);
+   }
+   </script>
+   
+    </body>
+    </html>
+
+
